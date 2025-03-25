@@ -101,12 +101,19 @@ class _Dropdown<T> extends StatelessWidget {
               if (decoration.header != null)
                 Flexible(child: decoration.header!),
               Flexible(
-                child: ListView.separated(
-                  separatorBuilder: (_, __) =>
-                      itemSeparator ?? const SizedBox.shrink(),
-                  shrinkWrap: true,
-                  itemCount: items.length,
-                  itemBuilder: (_, int index) => _buildOption(index, theme),
+                child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  removeBottom: true,
+                  removeLeft: true,
+                  removeRight: true,
+                  child: ListView.separated(
+                    separatorBuilder: (_, __) =>
+                        itemSeparator ?? const SizedBox.shrink(),
+                    shrinkWrap: true,
+                    itemCount: items.length,
+                    itemBuilder: (_, int index) => _buildOption(index, theme),
+                  ),
                 ),
               ),
               if (items.isEmpty && searchEnabled)
