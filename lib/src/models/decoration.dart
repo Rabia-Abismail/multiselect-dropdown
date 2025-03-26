@@ -271,8 +271,8 @@ class ChipDecoration {
     this.wrap = true,
   });
 
-  /// The icon to display for deleting a chip.
-  final Icon? deleteIcon;
+  /// The widget to display for deleting a chip, usually a [Icon].
+  final Widget? deleteIcon;
 
   /// The background color of the chip.
   final Color? backgroundColor;

@@ -641,12 +641,7 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
               _dropdownController
                   .unselectWhere((element) => element.label == option.label);
             },
-            child: SizedBox(
-              width: 16,
-              height: 16,
-              child: chipDecoration.deleteIcon ??
-                  const Icon(Icons.close, size: 16),
-            ),
+            child: chipDecoration.deleteIcon ?? const Icon(Icons.close, size: 16),
           ),
         ],
       ),
