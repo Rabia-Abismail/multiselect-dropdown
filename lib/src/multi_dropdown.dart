@@ -86,6 +86,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
   ///
   ///
   const MultiDropdown({
+    required this.mainContext,
     required this.items,
     this.fieldDecoration = const FieldDecoration(),
     this.dropdownDecoration = const DropdownDecoration(),
@@ -134,6 +135,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
   ///
   /// ```
   const MultiDropdown.future({
+    required this.mainContext,
     required this.future,
     this.fieldDecoration = const FieldDecoration(),
     this.dropdownDecoration = const DropdownDecoration(),
@@ -157,6 +159,9 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
     Key? key,
   })  : items = const [],
         super(key: key);
+
+  /// main app context
+  final BuildContext mainContext;
 
   /// The list of dropdown items.
   final List<DropdownItem<T>> items;
@@ -400,9 +405,10 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
             final renderBoxSize = renderBox.size;
             final renderBoxOffset = renderBox.localToGlobal(Offset.zero);
 
-            final availableHeight = MediaQuery.of(context).size.height -
+            final availableHeight = MediaQuery.sizeOf(context).height -
                 renderBoxOffset.dy -
-                renderBoxSize.height;
+                renderBoxSize.height -
+                MediaQuery.viewInsetsOf(widget.mainContext).bottom;
 
             final showOnTop =
                 availableHeight < widget.dropdownDecoration.maxHeight;
@@ -641,12 +647,7 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
               _dropdownController
                   .unselectWhere((element) => element.label == option.label);
             },
-            child: SizedBox(
-              width: 16,
-              height: 16,
-              child: chipDecoration.deleteIcon ??
-                  const Icon(Icons.close, size: 16),
-            ),
+            child: chipDecoration.deleteIcon ?? const Icon(Icons.close, size: 16),
           ),
         ],
       ),

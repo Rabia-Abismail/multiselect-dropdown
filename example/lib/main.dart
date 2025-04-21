@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
               physics: const AlwaysScrollableScrollPhysics(),
               child: SizedBox(
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.sizeOf(context).height,
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -88,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 4,
                       ),
                       MultiDropdown<User>(
+                        mainContext: context,
                         items: items,
                         controller: controller,
                         enabled: true,
